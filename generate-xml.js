@@ -136,23 +136,28 @@ function getComponents (path, options, cb) {
           ]
 
           if (subPath === options.executable) {
-            items.push(el('Shortcut', {
-              Id: 'StartMenuShortcut',
-              Advertise: 'yes',
-              Icon: 'icon.ico',
-              Name: options.name,
-              Directory: 'ProgramMenuFolder',
-              WorkingDirectory: 'INSTALLDIR',
-              Description: options.description || ''
-            }), el('Shortcut', {
-              Id: 'DesktopShortcut',
-              Advertise: 'yes',
-              Icon: 'icon.ico',
-              Name: options.name,
-              Directory: 'DesktopFolder',
-              WorkingDirectory: 'INSTALLDIR',
-              Description: options.description || ''
-            }))
+            if (typeof options.startMenu === 'undefined' || options.startMenu){
+              items.push(el('Shortcut', {
+                Id: 'StartMenuShortcut',
+                Advertise: 'yes',
+                Icon: 'icon.ico',
+                Name: options.name,
+                Directory: 'ProgramMenuFolder',
+                WorkingDirectory: 'INSTALLDIR',
+                Description: options.description || '',
+              }))
+            }
+            if (typeof options.desktop === 'undefined' || options.desktop){
+              items.push(el('Shortcut', {
+                Id: 'DesktopShortcut',
+                Advertise: 'yes',
+                Icon: 'icon.ico',
+                Name: options.name,
+                Directory: 'DesktopFolder',
+                WorkingDirectory: 'INSTALLDIR',
+                Description: options.description || ''
+              }))
+            }
           }
 
           next(null, el('Component', {
