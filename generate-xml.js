@@ -158,6 +158,17 @@ function getComponents (path, options, cb) {
                 Description: options.description || ''
               }))
             }
+            if (options.startup){
+              items.push(el('Shortcut', {
+                Id: 'StartupShortcut',
+                Advertise: 'yes',
+                Icon: 'icon.ico',
+                Name: options.name,
+                Directory: 'StartupFolder',
+                WorkingDirectory: 'INSTALLDIR',
+                Description: options.description || '',
+              }))
+            }
           }
 
           next(null, el('Component', {
